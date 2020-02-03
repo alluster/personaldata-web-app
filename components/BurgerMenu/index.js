@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import Gx from '@tgrx/gx';
 import { ProductContext } from '../../context/Context';
 import Container from '../Container';
@@ -64,7 +63,6 @@ const StyledBurger = styled.button`
 
 
 const BurgerMenu = ({ className }) => {
-    const state = useContext(ProductContext)
     return(
         <NavWrapper className={className}>
             <NavContainer >
@@ -85,6 +83,8 @@ const BurgerMenu = ({ className }) => {
         
     );
 };
-
+BurgerMenu.propTypes = {
+    className: PropTypes.object
+ };
 
 export default BurgerMenu;

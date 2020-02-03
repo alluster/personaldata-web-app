@@ -39,7 +39,6 @@ const Logo = styled.img `
 
 
 const TopNavigation = ({ className }) => {
-    const state = useContext(ProductContext)
     return(
         <NavWrapper className={className}>
             <NavContainer>
@@ -70,6 +69,8 @@ const TopNavigation = ({ className }) => {
         
     );
 };
-
+TopNavigation.propTypes = {
+    className: PropTypes.object
+ };
 
 export default TopNavigation;

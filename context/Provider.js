@@ -37,7 +37,7 @@ const Provider = ({children}) => {
         Client.checkout.addLineItems(checkoutId, lineItemsToAdd).then((checkout) => {
             setCheckout(checkout)
             
-                checkout.lineItems.map((item, i) => {
+                checkout.lineItems.map(() => {
                    console.log(totalProductQuantity)
                    setTotalProductQuantity(prevState => prevState + 1)
                 })
@@ -94,7 +94,8 @@ const Provider = ({children}) => {
             </ProductContext.Provider>
         );
     }
-
-
+    Provider.propTypes = {
+        children: PropTypes.object
+     };
 
 export default Provider;

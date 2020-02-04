@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Head from '../components//head';
-import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
 import { createGlobalStyle } from "styled-components";
 import TopNavigation from '../components/TopNavigation';

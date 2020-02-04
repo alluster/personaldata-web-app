@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {ProductContext} from './Context';
 import Client from '../connect-shopify';
+import PropTypes from 'prop-types';
 
 const Provider = ({children}) => {
 
@@ -82,6 +83,7 @@ const Provider = ({children}) => {
                     setQuantity,
                     createCheckout,
                     updateCheckout,
+                    updatedCheckout,
                     getCheckout,
                     productsList, 
                     product, 

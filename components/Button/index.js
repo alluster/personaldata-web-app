@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 
 const StyledButton = styled.button `
     width: 200px;
@@ -20,6 +20,8 @@ const Button = (props) => {
     );
 };
 
- 
+Button.propTypes = {
+    text: PropTypes.string
+ };
 
 export default Button;

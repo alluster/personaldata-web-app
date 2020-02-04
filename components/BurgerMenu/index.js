@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 import Gx from '@tgrx/gx';
-import { ProductContext } from '../../context/Context';
 import Container from '../Container';
+import PropTypes from 'prop-types';
 
 const LOGO_IMG = '/logo.png';
 

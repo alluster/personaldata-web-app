@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useContext }from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import Gx from '@tgrx/gx';
-
-
+import axios from 'axios';
+import BarLoader from "react-spinners/BarLoader";
+import { AppContext } from  '../../context/Context'
 
 
 const FormContainer = styled(Container)`
@@ -49,26 +50,83 @@ const SubmitButton = styled.button`
     text-align: center;
     min-width: 100%;
     margin: 0px 10px 0px 10px;
-    @media (max-width: ${props => props.theme.screenSize.tablet}) {
+    margin-top: 0px;
+    @media (max-width: 900px) {
         margin: 20px 0px 0px 0px;
+
 
      }
 
 `
 
+
+const SubmitButtonDeActive = styled.button`
+    background-color: ${props => props.theme.colors.persOrangeDark};
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    min-height: 40px;
+    line-height: 40px;
+    text-align: center;
+    min-width: 100%;
+    margin: 0px 10px 0px 10px;
+    @media (max-width: ${props => props.theme.screenSize.tablet}) {
+        margin: 20px 0px 0px 0px;
+
+     }
+
+`;
+
 const EmailForm = () => {
+    const context = useContext(AppContext)
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = () => {
+        context.setSubmit(true)
+        context.setEmail(context.inputValue)
+
+        setTimeout(!loading, function(){ setLoading(!loading); }, 3000);
+        axios.post('/sendemail',
+            {
+                body: {
+                    "email": "jell"
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            },  
+            context.setInput("")
+        )
+         
+        
+
+          .then(function () {
+            // setLoading(!loading)
+          })
+    }
+ 
     return(
         <Wrapper>
             <FormContainer>
                 <Gx col={8} breakpoint={800}>
                     <InputContainer>
-                        <InputField  placeholder="Submit your email here" />
+                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} placeholder="Anna sähköpostiosoite" />
                     </InputContainer>
                 </Gx>
                 <Gx col={4} breakpoint={800}>
-                    <SubmitButton>Submit</SubmitButton>
+                {
+                            context.inputValue === "" ?
+                            <SubmitButtonDeActive >Täytä hakukenttä</SubmitButtonDeActive>
+                                :
+                            <SubmitButton onClick={() => handleSubmit(context.inputValue)}>Lähetä</SubmitButton>
+   
+                        }
                 </Gx>
-               
+                <BarLoader
+                    size={150}
+                    //size={"150px"} this also works
+                    color={"white"}
+                    loading={loading}
+                    />
             </FormContainer>
 
         </Wrapper>

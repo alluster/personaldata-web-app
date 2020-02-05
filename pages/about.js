@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Layout from '../layouts/layout';
 import Container from '../components/Container';
-import EmailForm from '../components/EmailForm';
 import Hero from '../components/Hero';
 import { createGlobalStyle } from "styled-components";
-import { AppContext } from '../context/Context';
 
 const GlobalStyle = createGlobalStyle`
     body, html {
@@ -46,14 +44,14 @@ const GlobalStyle = createGlobalStyle`
 
 
 const Home = () => {
-    const context = useContext(AppContext)
-	const pageTitle = "Uusi tapa selvittää henkilökohtainen datajälkesi"
-    const pageIngress = "Syötä sähköpostiosoitteesi niin listaamamme yritykset lähettävät sinusta tallennetut tiedot."
+	
+    const pageTitle = "Yksilöllä on oikeus tietää mitä dataa hänestä on kerätty.";
+    const pageIngress = "Tämän takia olemme rakentaneet personaldata.fi palvelun. Palvelun käyttö ei vaadi muuta kuin sen että sinulla on toimiva sähköpostiosoite.";
+
 	return(
-			<Layout title="Home" >
+			<Layout title="About" >
 				<Container>
-                    <Hero title={pageTitle} ingress={pageIngress}/>
-                    { context.submit ? null :  <EmailForm />}
+                    <Hero title={pageTitle} ingress={pageIngress} />
 				</Container>
 				<GlobalStyle />
 			</Layout>

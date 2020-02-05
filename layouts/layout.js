@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Head from '../components//head';
-import Hero from '../components/Hero';
 import { createGlobalStyle } from "styled-components";
 import TopNavigation from '../components/TopNavigation';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import theme from "../theme";
 import { ThemeProvider } from 'styled-components';
-import EmailForm from '../components/EmailForm';
 import BurgerMenu from '../components/BurgerMenu';
 
 const GlobalStyle = createGlobalStyle`
@@ -86,8 +84,7 @@ const Layout = ({title, children}) => {
                     
                     <Nav />
                     <Burger />
-                    <Hero />
-                    <EmailForm />
+
                 </header>
                 <GlobalStyle />
                 { children }

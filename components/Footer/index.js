@@ -62,7 +62,17 @@ const Logo = styled.img`
     
 `;
 
-const disclaimer = "Personaldata.fi palvelu on luotu yksityisten ihmisten työkaluksi etsiä oman sähköpostinsa persuteella tallennettuja tietoja yritysten tietokannoista. Personaldata.fi ei ota vastuuta tiedoista jotka käyttäjä vastaanottaa palvelun käytön tuloksena."
+const Link = styled.a`
+     font-weight: 700 !important;
+     text-decoration: underline !important;
+     :hover {
+         cursor: pointer;
+     }
+`;
+
+
+
+const disclaimer = "Personaldata.fi palvelu on luotu työkaluksi henkilökohtaisen sähköpostiosoitteen persuteella tallennetun informaation etsimiseen yritysten tietokannoista. Personaldata.fi ei ota vastuuta tiedoista, jotka käyttäjä vastaanottaa palvelun käytön tuloksena."
 const Footer = () => {
     return(
         <FooterContent>
@@ -71,7 +81,8 @@ const Footer = () => {
                     <Column>
                         <ColumnHigh>
                             <Logo src="/logo.png" />
-                            <p>data@personaldata.fi</p>
+                            <h4>data@personaldata.fi</h4>
+                            <span>Anna tukesi projektille. <Link href="https://shop.spreadshirt.fi/personaldatafi/">Osta huppari verkkokaupasta</Link></span>
                         </ColumnHigh>
                         <ColumnLowLeft>
                         {disclaimer}

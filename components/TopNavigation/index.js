@@ -16,12 +16,8 @@ const LinkText = styled.h3`
     }
 `;
 
-const NavWrapper = styled.div `
-    background-color: ${props => props.theme.colors.persBlue}
 
-`
-
-const NavContainer = styled(Container)`
+const NavContainer = styled.div`
     text-align: center;
     padding-top: 20px;
 `;
@@ -40,8 +36,8 @@ const Logo = styled.img `
 
 const TopNavigation = ({ className }) => {
     return(
-        <NavWrapper className={className}>
-            <NavContainer>
+        <Container >
+            <NavContainer className={className} >
                 <Gx col={2}>
                     <Logo src={LOGO_IMG} />
                 </Gx>
@@ -49,24 +45,23 @@ const TopNavigation = ({ className }) => {
 
                 </Gx>
                 <Gx col={1}>
-                    <Link href="/product">
+                    <Link href="/">
                         <a>
-                        <LinkText>Login</LinkText> 
+                        <LinkText>Etusivu</LinkText> 
                         </a>
                     </Link>
                 </Gx>
                 <Gx col={1}>
-                    <Link href="/product">
+                    <Link href="/about">
                         <a>
-                        <LinkText>Account</LinkText> 
+                        <LinkText>Tietoa</LinkText> 
                         </a>
                     </Link>
                 </Gx>
+                
+            </NavContainer>        
+        </Container>
             
-            </NavContainer>
-
-        </NavWrapper>
-        
     );
 };
 TopNavigation.propTypes = {

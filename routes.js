@@ -4,4 +4,5 @@ routes
     .add('index', '/')
     .add('about', '/about')
     .add('contact', '/contact')
-    .add('product', '/product/:slug');
+    .add('product', '/product/:slug')
+    .add('sendemail', '/sendemail');

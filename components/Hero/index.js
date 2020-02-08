@@ -9,6 +9,11 @@ const Title = styled.h1`
     color: white;
     font-weight: 400;
     font-size:  ${props => props.theme.fontSize.h3}
+    @media (max-width: ${props => props.theme.screenSize.tablet}) {
+        font-size: 24px;
+
+
+     }
 `;
 
 const Ingress = styled.p `
@@ -17,6 +22,11 @@ const Ingress = styled.p `
     font-weight: 400;
     text-align: center;
     margin-top: 50px;
+    @media (max-width: ${props => props.theme.screenSize.tablet}) {
+        font-size: 14px;
+        margin-top: 20px;
+
+     }
 `
 
 
@@ -24,6 +34,10 @@ const HeroStyled = styled.div`
     background-color: ${props => props.theme.colors.persBlue};
     min-height: 200px;
     padding-top: 100px;
+    @media (max-width: ${props => props.theme.screenSize.tablet}) {
+        padding-top: 20px;
+
+     }
 `
 const SubmitButton = styled.button`
     background-color: ${props => props.theme.colors.persOrange};

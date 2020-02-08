@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
 const Home = () => {
     const context = useContext(AppContext)
 	const pageTitle = "Uusi tapa selvittää henkilökohtainen datajälkesi"
-    const pageIngress = "Syötä sähköpostiosoitteesi niin listaamamme yritykset lähettävät sinusta tallennetut tiedot."
+    const pageIngress = "Lähetämme sähköpostiosoitteesi yritysrekisterimme. Tämän jälkeen yritykset lähettävät sähköpostiisi liitetyt tiedot suoraan sinulle."
 	return(
 			<Layout title="Home" >
 				<Container>

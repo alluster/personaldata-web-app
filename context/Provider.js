@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { AppContext } from './Context';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 const Provider = ({children}) => {
 
     const [submit, setSubmit] = useState(false)
     const [inputValue, setInput] = useState("");
     const [email, setEmail] = useState("");
+
+    const EmailToBackEnd = () => {
+        axios.post('/sendEmail',
+    {
+        email: inputValue
+    },  
+    setSubmit(true),
+    setInput("")
+)       }
+
+
 	useEffect(() => {
         
         }, []);
@@ -18,7 +30,8 @@ const Provider = ({children}) => {
                     inputValue,
                     setInput,
                     setEmail,
-                    email
+                    email,
+                    EmailToBackEnd
                 }} 
             >
                 {children}

@@ -1,9 +1,7 @@
-import React, { useState, useContext }from 'react';
+import React, { useContext }from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import Gx from '@tgrx/gx';
-import axios from 'axios';
-import BarLoader from "react-spinners/BarLoader";
 import { AppContext } from  '../../context/Context'
 
 
@@ -18,11 +16,22 @@ const Wrapper = styled.div `
 const InputField = styled.input`
     height: 40px;
     font-size: 20px;
-    color: gray;
+    color: #191919;
     min-width: 100%;
-    padding-left: 15px;
-    padding-right: -15px;
+    text-align: center;
     background-color: white;
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: gray;
+        opacity: 1; /* Firefox */
+      }
+      
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: gray;
+      }
+      
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: gray;
+      }
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
         font-size: 16px;
         text-align: center;
@@ -32,12 +41,7 @@ const InputField = styled.input`
 
 `
 
-const InputContainer = styled(Container)`
-    @media (max-width: ${props => props.theme.screenSize.tablet}) {
-        margin: 0px 0px 0px 0px !important;
-    }
 
-`
 
 const SubmitButton = styled.button`
     background-color: ${props => props.theme.colors.persOrange};
@@ -49,8 +53,7 @@ const SubmitButton = styled.button`
     line-height: 40px;
     text-align: center;
     min-width: 100%;
-    margin: 0px 10px 0px 10px;
-    margin-top: 0px;
+    margin-top: 20px;
     @media (max-width: 900px) {
         margin: 20px 0px 0px 0px;
 
@@ -61,7 +64,7 @@ const SubmitButton = styled.button`
 
 
 const SubmitButtonDeActive = styled.button`
-    background-color: ${props => props.theme.colors.persOrangeDark};
+    background-color: ${props => props.theme.colors.gray};
     border: none;
     border-radius: 6px;
     color: white;
@@ -79,54 +82,28 @@ const SubmitButtonDeActive = styled.button`
 `;
 
 const EmailForm = () => {
-    const context = useContext(AppContext)
-    const [loading, setLoading] = useState(false)
-
-    const handleSubmit = () => {
-        context.setSubmit(true)
-        context.setEmail(context.inputValue)
-
-        setTimeout(!loading, function(){ setLoading(!loading); }, 3000);
-        axios.post('/sendemail',
-            {
-                body: {
-                    "email": "jell"
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            },  
-            context.setInput("")
-        )
-         
-        
-
-          .then(function () {
-            // setLoading(!loading)
-          })
-    }
+    const context = useContext(AppContext)  
  
     return(
         <Wrapper>
             <FormContainer>
-                <Gx col={8} breakpoint={800}>
-                    <InputContainer>
-                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} placeholder="Anna sähköpostiosoite" />
-                    </InputContainer>
+                <form onSubmit={() => {context.setEmail(context.inputValue), context.EmailToBackEnd()}}>
+
+                <Gx col={12} breakpoint={800}>
+                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} placeholder="Syötä sähköpostiosoite" />
+                    
                 </Gx>
-                <Gx col={4} breakpoint={800}>
-                {
-                            context.inputValue === "" ?
-                            <SubmitButtonDeActive >Täytä hakukenttä</SubmitButtonDeActive>
-                                :
-                            <SubmitButton onClick={() => handleSubmit(context.inputValue)}>Lähetä</SubmitButton>
-   
-                        }
+                <Gx col={12} breakpoint={800}>
+                    {
+                        context.inputValue === "" ?
+                        null
+                            :
+                        <SubmitButton type="submit">Lähetä</SubmitButton>
+    
+                    }
                 </Gx>
-                <BarLoader
-                    size={150}
-                    //size={"150px"} this also works
-                    color={"white"}
-                    loading={loading}
-                    />
+                </form>
+
             </FormContainer>
 
         </Wrapper>

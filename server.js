@@ -8,6 +8,7 @@ const handle = routes.getRequestHandler(app);
 const PORT = process.env.PORT || 3000;
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser')
+sgTransport = require('nodemailer-sendgrid-transport');
 
 const emailOptions = {
   title: "Kiitos kun käytit palveluamme!",
@@ -74,19 +75,24 @@ app.prepare().then(() => {
     }));
    
     server.post('/sendEmail', (req, res) => {
-        var transporter = nodemailer.createTransport({
-          host: `${process.env.EMAIL_HOST}`,
-          auth: {
-            user: `${process.env.EMAIL}`,
-            pass: `${process.env.PASSWORD}`
-          }
-        });
+        var transporter = nodemailer.createTransport(sgTransport({
+			auth: {
+				api_key: process.env.ADMIN_EMAIL_API_KEY // your api key here, better hide it in env vars
+			}
+        //   host: `${process.env.EMAIL_HOST}`,
+        //   auth: {
+        //     user: `${process.env.EMAIL}`,
+        //     pass: `${process.env.PASSWORD}`
+        //   }
+        }));
         
         var mailOptions = {
           from: 'data@personaldata.fi',
           to: `${req.body.email}`,
           subject: `${emailOptions.title}`,
-          text: `${emailOptions.ingress}`,
+		  text: `${emailOptions.ingress}`,
+		  replyTo: 'data@personaldata.fi',
+
           html: `${email}`
         };
         

@@ -60,7 +60,10 @@ const SubmitButton = styled.button`
 
      }
 
-`;
+`
+
+
+
 
 const EmailForm = () => {
     const context = useContext(AppContext)  
@@ -68,7 +71,6 @@ const EmailForm = () => {
     return(
         <Wrapper>
             <FormContainer>
-                <form onSubmit={() => {context.setEmail(context.inputValue), context.EmailToBackEnd()}}>
 
                 <Gx col={12} breakpoint={800}>
                         <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} placeholder="Syötä sähköpostiosoite" />
@@ -79,11 +81,10 @@ const EmailForm = () => {
                         context.inputValue === "" ?
                         null
                             :
-                        <SubmitButton type="submit">Lähetä</SubmitButton>
+                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToBackEnd()}}>Lähetä</SubmitButton>
     
                     }
                 </Gx>
-                </form>
 
             </FormContainer>
 

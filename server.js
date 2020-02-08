@@ -24,15 +24,15 @@ background {
   padding: 30px;
   }
 h1 {
-  color: white;
-  font-family: Montserrat;
+	color: #FFFFFF;
+	font-family: Montserrat;
   font-size: 300%;
 }
   h3 {
  	color: white
   }
 p  {
-  color: white;
+  color: #FFFFFF;
   font-family: Montserrat;
   font-size: 160%;
   margin-bottom: 20px;

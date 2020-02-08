@@ -60,25 +60,6 @@ const SubmitButton = styled.button`
 
      }
 
-`
-
-
-const SubmitButtonDeActive = styled.button`
-    background-color: ${props => props.theme.colors.gray};
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 20px;
-    min-height: 40px;
-    line-height: 40px;
-    text-align: center;
-    min-width: 100%;
-    margin: 0px 10px 0px 10px;
-    @media (max-width: ${props => props.theme.screenSize.tablet}) {
-        margin: 20px 0px 0px 0px;
-
-     }
-
 `;
 
 const EmailForm = () => {

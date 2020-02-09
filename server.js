@@ -13,7 +13,7 @@ sgTransport = require('nodemailer-sendgrid-transport');
 const emailOptions = {
   title: "Kiitos kun käytit palveluamme!",
   ingress: "Olemme lähettäneet tietosi yritysrekisteriimme. Tarkkaile sähköpostiasi mahdollisten yhteydenottojen varalta.",
-  body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuuku, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilenteen. ",
+  body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilenteen. ",
 }
 const email = `<html>
 <head>

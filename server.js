@@ -13,7 +13,7 @@ sgTransport = require('nodemailer-sendgrid-transport');
 const emailOptions = {
   title: "Kiitos kun käytit palveluamme!",
   ingress: "Olemme lähettäneet tietosi yritysrekisteriimme. Tarkkaile sähköpostiasi mahdollisten yhteydenottojen varalta.",
-  body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilenteen. ",
+  body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilanteen. ",
 }
 const email = `<html>
 <head>
@@ -30,7 +30,9 @@ h1 {
   font-size: 300%;
 }
   h3 {
- 	color: white
+	 color: white
+	 font-size: 220%;
+
   }
 p  {
   color: #FFFFFF;
@@ -53,10 +55,10 @@ p  {
 	</div>
 
 	<div>
-		<a style="color: #FFFFFF; font-size: 14px; text-decoration: underline" href="/http://personaldata.fi"><font color="#FFFFFF">Palaa sivustolle</font></></a>
+		<a style="color: #FFFFFF; font-size: 14px; text-decoration: underline" href="/http://personaldata.fi">Palaa sivustolle</></a>
 	</div>
 	<div>
-		<a style="color: #FFFFFF; font-size: 14px; text-decoration: underline" href="/https://shop.spreadshirt.fi/personaldatafi/"><font color="#FFFFFF">Tue projektia ja hanki huppari</font></a>
+		<a style="color: #FFFFFF; font-size: 14px; text-decoration: underline" href="/https://shop.spreadshirt.fi/personaldatafi/">Tue projektia ja hanki huppari</a>
 	</div>
 	<p>
 	data@personaldata.fi

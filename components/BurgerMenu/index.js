@@ -4,6 +4,8 @@ import Gx from '@tgrx/gx';
 import Container from '../Container';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { Links } from '../links';
+
 const LOGO_IMG = '/logo.png';
 
 const NavWrapper = styled.div `
@@ -75,8 +77,12 @@ const BurgerMenu = ({className} ) => {
     return(
         <NavWrapper className={className}>
             <NavContainer >
-            <Gx col={4} breakpoint={300} >
-                    <Logo src={LOGO_IMG} />
+                <Gx col={4} breakpoint={300} >
+                    <Link href="/">
+                        <a onClick={() => setNav(false)}>
+                        <Logo src={LOGO_IMG} />
+                        </a>
+                    </Link>
                 </Gx>
                 <Gx col={8} breakpoint={300} >
                     <BurgerContainer>
@@ -91,16 +97,15 @@ const BurgerMenu = ({className} ) => {
                     nav ?
                     <Gx col={12} >
                         <NavOpen>
-                        <Link href="/">
-                            <a onClick={() => setNav(!nav)}>
-                                <h3 >Etusivu</h3>
-                            </a>
-                        </Link>
-                        <Link href="/about">
-                            <a onClick={() => setNav(!nav)}>
-                                <h3 >Tietoa</h3>
-                            </a>
-                        </Link>
+                            {Links.map((item, i) => {
+                                return (
+                                    <Link key={i} href={item.link}>
+                                        <a onClick={() => setNav(!nav)}>
+                                            <h3 >{item.name}</h3>
+                                        </a>
+                                    </Link>
+                                )
+                            })}    
                         </NavOpen>
                     </Gx>
                     :

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Gx from '@tgrx/gx';
 import Container from '../Container';
 import PropTypes from 'prop-types';
-
+import { Links } from '../links';
 const LOGO_IMG = '/logo.png';
 
 const LinkText = styled.h3`
@@ -33,32 +33,32 @@ const Logo = styled.img `
 `
 
 
-
 const TopNavigation = ({ className }) => {
     return(
         <Container >
             <NavContainer className={className} >
+
                 <Gx col={2}>
-                    <Logo src={LOGO_IMG} />
+                    <Link href="/">
+                        <a onClick={() => setNav(false)}>
+                        <Logo src={LOGO_IMG} />
+                        </a>
+                    </Link>                
                 </Gx>
-                <Gx col={8}>
+                <Gx col={6}>
 
                 </Gx>
-                <Gx col={1}>
-                    <Link href="/">
-                        <a>
-                        <LinkText>Etusivu</LinkText> 
-                        </a>
-                    </Link>
-                </Gx>
-                <Gx col={1}>
-                    <Link href="/about">
-                        <a>
-                        <LinkText>Tietoa</LinkText> 
-                        </a>
-                    </Link>
-                </Gx>
-                
+            { Links.map((item, i) => {
+                return (
+                    <Gx key={i} col={1}>
+                        <Link href={item.link}>
+                            <a>
+                            <LinkText>{item.name}</LinkText> 
+                            </a>
+                        </Link>
+                    </Gx>
+                )
+            })}
             </NavContainer>        
         </Container>
             

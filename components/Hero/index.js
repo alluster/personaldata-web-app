@@ -33,6 +33,7 @@ const Ingress = styled.p `
 const HeroStyled = styled.div`
     background-color: ${props => props.theme.colors.persBlue};
     min-height: 200px;
+    margin-bottom: 100px;
     padding-top: 100px;
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
         padding-top: 20px;

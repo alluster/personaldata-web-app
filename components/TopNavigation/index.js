@@ -40,7 +40,7 @@ const TopNavigation = ({ className }) => {
 
                 <Gx col={2}>
                     <Link href="/">
-                        <a onClick={() => setNav(false)}>
+                        <a>
                         <Logo src={LOGO_IMG} />
                         </a>
                     </Link>                

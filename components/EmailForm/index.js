@@ -20,18 +20,23 @@ const InputField = styled.input`
     min-width: 100%;
     text-align: center;
     background-color: white;
+    -webkit-transform: translateZ(0px);
+    -webkit-appearance: none;
+    -webkit-text-fill-color: #191919;
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: gray;
         opacity: 1; /* Firefox */
-      }
+        -webkit-appearance: none;
+        -webkit-text-fill-color: gray;
+    }
       
-      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
         color: gray;
-      }
-      
-      ::-ms-input-placeholder { /* Microsoft Edge */
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
         color: gray;
-      }
+    }
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
         font-size: 16px;
         text-align: center;
@@ -40,8 +45,6 @@ const InputField = styled.input`
      }
 
 `
-
-
 
 const SubmitButton = styled.button`
     background-color: ${props => props.theme.colors.persOrange};
@@ -73,7 +76,7 @@ const EmailForm = () => {
             <FormContainer>
 
                 <Gx col={12} breakpoint={800}>
-                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} placeholder="Syötä sähköpostiosoite" />
+                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} tyoe="text" placeholder="Syötä sähköpostiosoite" />
                     
                 </Gx>
                 <Gx col={12} breakpoint={800}>

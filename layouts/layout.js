@@ -47,7 +47,33 @@ const GlobalStyle = createGlobalStyle`
     }
     input {
         all: unset;
+        ::-webkit-input-placeholder {
+        color: red;
     }
+    :-moz-placeholder {
+        /* FF 4-18 */
+        color: red;
+        opacity: 1;
+    }
+    ::-moz-placeholder {
+        /* FF 19+ */
+        color: red;
+        opacity: 1;
+    }
+    :-ms-input-placeholder {
+        /* IE 10+ */
+        color: red;
+    }
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: red;
+    }
+    ::placeholder {
+        /* modern browser */
+        color: red;
+    }
+    }
+    
 `;
 
 const Background = styled.div `

@@ -29,13 +29,13 @@ app.prepare().then(() => {
 		const userEmailOptions = {
 			title: "Kiitos kun käytit palveluamme!",
 			ingress: "Olemme lähettäneet tietosi yritysrekisteriimme. Tarkkaile sähköpostiasi mahdollisten yhteydenottojen varalta.",
-			body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilanteen. ",
+			body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilanteen.",
 		}
   
         const companyEmailOptions = {
 			title: "Henkilökohtaiseen dataan liittyvä tietopyyntö",
-			ingress: "Olkaa hyvä ja lähettäkää kaikki email osoitteeseen "+ `${req.body.email}` + " liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen " + `${req.body.email}`,
-			body: "Olette vastaanottaneet tämän viestin koska käyttäjämme on tehnyt tietopyynnön liittyen dataan joka liittyy sähköpostiosoitteeseen " + `${req.body.email}` + " liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen " + `${req.body.email}`,
+			ingress: "Olkaa hyvä ja lähettäkää kaikki email osoitteeseen \u00A0"+ `${req.body.email}` + "\u00A0 liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen \u00A0" + `${req.body.email}`,
+			body: "Olette vastaanottaneet tämän viestin koska käyttäjämme on tehnyt tietopyynnön liittyen dataan joka liittyy sähköpostiosoitteeseen \u00A0" + `${req.body.email}` + "\u00A0 liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen \u00A0" + `${req.body.email}`,
 		  }
 		const emailToCompanies =
 			`<html>
@@ -117,10 +117,10 @@ app.prepare().then(() => {
 				</div>
 
 				<div>
-					<a  href="/http://personaldata.fi">www.personaldata.fi</></a>
+					<a  href="http://personaldata.fi">www.personaldata.fi</></a>
 				</div>
 				<div>
-					<a href="/https://shop.spreadshirt.fi/personaldatafi/">Tue projektia hankkimalla huppari verkkokaupastamme</a>
+					<a href="https://shop.spreadshirt.fi/personaldatafi/">Tue projektia hankkimalla huppari verkkokaupastamme</a>
 				</div>
 				<p>
 				data@personaldata.fi

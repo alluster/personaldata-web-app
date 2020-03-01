@@ -84,7 +84,7 @@ const EmailForm = () => {
                         context.inputValue === "" ?
                         null
                             :
-                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToBackEnd()}}>Lähetä</SubmitButton>
+                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToUser()}}>Lähetä</SubmitButton>
     
                     }
                 </Gx>

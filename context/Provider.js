@@ -9,7 +9,7 @@ const Provider = ({children}) => {
     const [inputValue, setInput] = useState("");
     const [email, setEmail] = useState("");
 
-    const EmailToBackEnd = () => {
+    const EmailToUser = () => {
         axios.post('/sendEmail',
     {
         email: inputValue
@@ -31,7 +31,7 @@ const Provider = ({children}) => {
                     setInput,
                     setEmail,
                     email,
-                    EmailToBackEnd
+                    EmailToUser
                 }} 
             >
                 {children}

@@ -4,14 +4,18 @@ import Container from '../components/Container';
 import EmailForm from '../components/EmailForm';
 import Hero from '../components/Hero';
 import { AppContext } from '../context/Context';
-const Home = () => {
+import { useRouter } from 'next/router';
+
+const User = () => {
+    const router = useRouter();
+
     const context = useContext(AppContext)
 	const pageTitle = "Uusi tapa selvittää henkilökohtainen datajälkesi"
     const pageIngress = "Lähetämme sähköpostiosoitteesi yritysrekisterimme. Tämän jälkeen yritykset lähettävät sähköpostiisi liitetyt tiedot suoraan sinulle."
 	return(
 			<Layout title="Home" >
 				<Container>
-					<img src="./how-it-works.svg" />
+                <h1>{router.query.user}</h1>
                     <Hero title={pageTitle} ingress={pageIngress}/>
                     { context.submit ? null :  <EmailForm />}
 				</Container>
@@ -20,4 +24,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default User

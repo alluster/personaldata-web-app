@@ -27,8 +27,7 @@ const Ingress = styled.p `
         margin-top: 20px;
 
      }
-`
-
+`;
 
 const HeroStyled = styled.div`
     background-color: ${props => props.theme.colors.persBlue};
@@ -39,7 +38,7 @@ const HeroStyled = styled.div`
         padding-top: 20px;
 
      }
-`
+`;
 const SubmitButton = styled.button`
     background-color: ${props => props.theme.colors.persOrange};
     border: none;
@@ -56,7 +55,7 @@ const SubmitButton = styled.button`
 
      }
 
-`
+`;
 
 const Link = styled.a`
      font-weight: 700 !important;

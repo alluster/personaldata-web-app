@@ -76,7 +76,7 @@ const EmailForm = () => {
             <FormContainer>
 
                 <Gx col={12} breakpoint={800}>
-                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} tyoe="text" placeholder="Syötä sähköpostiosoite" />
+                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} type="text" placeholder="Syötä sähköpostiosoite" />
                     
                 </Gx>
                 <Gx col={12} breakpoint={800}>
@@ -84,7 +84,7 @@ const EmailForm = () => {
                         context.inputValue === "" ?
                         null
                             :
-                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToUser()}}>Lähetä</SubmitButton>
+                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToUser(), context.setEmail('')}}>Lähetä</SubmitButton>
     
                     }
                 </Gx>

@@ -38,48 +38,10 @@ app.prepare().then(() => {
 			body: "Olette vastaanottaneet tämän viestin koska käyttäjämme on tehnyt tietopyynnön liittyen dataan joka liittyy sähköpostiosoitteeseen \u00A0" + `${req.body.email}` + "\u00A0 liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen \u00A0" + `${req.body.email}`,
 		  }
 		const emailToCompanies =
-			`<html>
-				<head>
-				<style>
-				background {
-				width: 100%;
-				height: 100%;
-				padding: 30px;
-				}
-				h1 {
-					font-family: Montserrat;
-				font-size: 300%;
-				}
-				h3 {
-					font-size: 220%;
-				
-				}
-				p  {
-				font-family: Montserrat;
-				font-size: 160%;
-				margin-bottom: 20px;
-				}
-				
-				</style>
-				</head>
-					<body>
-					<div style="padding: 30px;width: 100%;height:100%">
-					<div>
-						<img style="max-width: 200px" src="https://personaldata.herokuapp.com/logo-dark.png"  alt="Personaldata.fi"/>
-					</div>
-					<div style="max-width: 80%;">
-						<h1>${companyEmailOptions.title}</h1>
-						<h3>${companyEmailOptions.ingress}</h3>
-						<p>${companyEmailOptions.body}</p>
-					</div>
-				
-					<p>
-						Lisätietoa: data@personaldata.fi
-					</p>
-					</div>
-					</body>
-				</html>
-				`
+			`${companyEmailOptions.title}
+			${companyEmailOptions.ingress}
+			${companyEmailOptions.body}
+			`
 		const emailToUser = `
 			<html>
 			<head>
@@ -131,7 +93,7 @@ app.prepare().then(() => {
 
 
         var mailToUser = {
-			from: `${req.body.email}`,
+			from: `data@personaldata.fi`,
 			to: `${req.body.email}`,
 			subject: `${userEmailOptions.title}`,
 			text: `${userEmailOptions.ingress}`,
@@ -165,7 +127,9 @@ app.prepare().then(() => {
     server.get('*', (req, res) => {
         return handle(req, res);
     });
-
+	server.get("/user/:slug", (req, res) => {
+		return app.render(req, res, "/", { slug: req.params.slug })
+	  })
     server.listen(PORT, err => {
         if (err) throw err;
         console.log('> Ready on http://localhost:' + PORT);

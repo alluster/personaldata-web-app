@@ -20,6 +20,7 @@ const LinkText = styled.h3`
 const NavContainer = styled.div`
     text-align: center;
     padding-top: 20px;
+    min-width: 100%;
 `;
 
 const Logo = styled.img `
@@ -38,7 +39,7 @@ const TopNavigation = ({ className }) => {
         <Container >
             <NavContainer className={className} >
 
-                <Gx col={2}>
+                <Gx col={3}>
                     <Link href="/">
                         <a>
                         <Logo src={LOGO_IMG} />

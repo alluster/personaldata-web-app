@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import theme from "../theme";
 import { ThemeProvider } from 'styled-components';
 import BurgerMenu from '../components/BurgerMenu';
+import Container from '../components/Container';
 
 const GlobalStyle = createGlobalStyle`
     body, html {
@@ -76,58 +77,43 @@ const GlobalStyle = createGlobalStyle`
     
 `;
 
-const Background = styled.div `
+const Background = styled.div`
     background-color: ${props => props.theme.colors.persBlue}
 
 
 `
-const Burger = styled(BurgerMenu)`
-    display: none;
-    @media (max-width: ${props => props.theme.screenSize.tablet}) {
-        display: inline-block
-     }
 
 
-`
-const Nav = styled(TopNavigation)`
-    display: inline-block;
-    @media (max-width: ${props => props.theme.screenSize.tablet}) {
-        display: none
-     }
 
-`
+const Layout = ({ title, children }) => {
+	return (
+		<ThemeProvider theme={theme}>
+			<Background>
+				<Head>
+					<title>{title}</title>
+					<meta charSet='utf-8' />
+					<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+				</Head>
+					<Container>
+						<TopNavigation />
+						<BurgerMenu />
+						{children}
+					</Container>
+				<GlobalStyle />
+		
+				<Footer />
 
+			</Background>
 
-const Layout = ({title, children}) => {
-    return(
-            <ThemeProvider theme={theme}>
-            <Background>
-                <Head>
-                        <title>{ title }</title>
-                        <meta charSet='utf-8' />
-                        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-                </Head>
-                <header>
-                    
-                    <Nav />
-                    <Burger />
+		</ThemeProvider>
 
-                </header>
-                <GlobalStyle />
-                { children }
-                <Footer />
-
-            </Background>
-               
-            </ThemeProvider>
-
-        );
+	);
 }
-    
+
 Layout.propTypes = {
-	children: PropTypes.object,
+	children: PropTypes.any,
 	title: PropTypes.string
 }
-    
+
 
 export default Layout;

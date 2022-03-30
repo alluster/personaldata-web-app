@@ -10,8 +10,12 @@ const LOGO_IMG = '/logo.png';
 
 const NavWrapper = styled.div `
     width: 100%;
-    margin-top: 20px;
-
+    padding-top: 20px;
+	display:none;
+	margin-bottom: 40px;
+	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+        display: block;
+     }
 `;
 
 const NavContainer = styled(Container)`

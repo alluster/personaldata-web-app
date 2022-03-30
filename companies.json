@@ -1,3 +1,11 @@
 [
-    "data@personaldata.fi"
+	{
+		"name": "Allu",
+		"email": "aleksanteri.heliovaara@gmail.com"
+	},
+	{
+		"name": "Extreme Consulting",
+		"email": "aleksanteri.heliovaara@extreme.consulting"
+	}
+
 ]

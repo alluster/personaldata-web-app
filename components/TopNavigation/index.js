@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Gx from '@tgrx/gx';
-import Container from '../Container';
 import PropTypes from 'prop-types';
 import { Links } from '../links';
 const LOGO_IMG = '/logo.png';
@@ -21,9 +20,13 @@ const NavContainer = styled.div`
     text-align: center;
     padding-top: 20px;
     min-width: 100%;
+	display: flex;
+	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+        display: none;
+     }
 `;
 
-const Logo = styled.img `
+const Logo = styled.img`
     width: 100%;
     object-fit: cover;
     padding: 10px;
@@ -34,39 +37,38 @@ const Logo = styled.img `
 `
 
 
-const TopNavigation = ({ className }) => {
-    return(
-        <Container >
-            <NavContainer className={className} >
+const TopNavigation = () => {
+	return (
+		<NavContainer  >
 
-                <Gx col={3}>
-                    <Link href="/">
-                        <a>
-                        <Logo src={LOGO_IMG} />
-                        </a>
-                    </Link>                
-                </Gx>
-                <Gx col={6}>
+				<Gx col={3}>
+					<Link href="/">
+						<a>
+							<Logo src={LOGO_IMG} />
+						</a>
+					</Link>
+				</Gx>
+				<Gx col={6}>
 
-                </Gx>
-            { Links.map((item, i) => {
-                return (
-                    <Gx key={i} col={1}>
-                        <Link href={item.link}>
-                            <a>
-                            <LinkText>{item.name}</LinkText> 
-                            </a>
-                        </Link>
-                    </Gx>
-                )
-            })}
-            </NavContainer>        
-        </Container>
-            
-    );
+				</Gx>
+				{Links.map((item, i) => {
+					return (
+						<Gx key={i} col={1}>
+							<Link href={item.link}>
+								<a>
+									<LinkText>{item.name}</LinkText>
+								</a>
+							</Link>
+						</Gx>
+					)
+				})}
+
+		</NavContainer>
+
+	);
 };
 TopNavigation.propTypes = {
-    className: PropTypes.object
- };
+	className: PropTypes.object
+};
 
 export default TopNavigation;

@@ -1,28 +1,40 @@
-import React, { useContext }from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import Container from '../Container';
-import Gx from '@tgrx/gx';
-import { AppContext } from  '../../context/Context'
+import { AppContext } from '../../context/Context'
 
 
-const FormContainer = styled(Container)`
+const FormContainer = styled.div`
     margin-bottom: 30px;
-
-`
-const Wrapper = styled.div `
-    background-color: ${props => props.theme.colors.persBlue}
-
-`
+	width: 100%;
+	
+`;
+const InputContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+`;
+const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 20px;
+`;
 const InputField = styled.input`
-    height: 40px;
-    font-size: 20px;
-    color: #191919;
-    min-width: 100%;
+	padding-left: 60px;
+	padding-right: 60px;
+    height: 56px;
+    font-size: 18px;
+    color: #000;
+    max-width: calc(100% - 120px);
     text-align: center;
     background-color: white;
+	border: 1px solid gray;
+	border-radius: 8px;
     -webkit-transform: translateZ(0px);
     -webkit-appearance: none;
-    -webkit-text-fill-color: #191919;
+    -webkit-text-fill-color: #000;
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: gray;
         opacity: 1; /* Firefox */
@@ -40,11 +52,10 @@ const InputField = styled.input`
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
         font-size: 16px;
         text-align: center;
-        padding-left: 0;
-        padding-right: 0;
+       
      }
 
-`
+`;
 
 const SubmitButton = styled.button`
     background-color: ${props => props.theme.colors.persOrange};
@@ -55,7 +66,8 @@ const SubmitButton = styled.button`
     min-height: 40px;
     line-height: 40px;
     text-align: center;
-    min-width: 100%;
+	padding-left: 30px;
+	padding-right: 30px;
     margin-top: 20px;
     @media (max-width: 900px) {
         margin: 20px 0px 0px 0px;
@@ -63,38 +75,36 @@ const SubmitButton = styled.button`
 
      }
 
-`
+`;
 
 
 
 
 const EmailForm = () => {
-    const context = useContext(AppContext)  
- 
-    return(
-        <Wrapper>
-            <FormContainer>
+	const context = useContext(AppContext)
 
-                <Gx col={12} breakpoint={800}>
-                        <InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} type="text" placeholder="Syötä sähköpostiosoite" />
-                    
-                </Gx>
-                <Gx col={12} breakpoint={800}>
-                    {
-                        context.inputValue === "" ?
-                        null
-                            :
-                        <SubmitButton onClick={() => {context.setEmail(context.inputValue), context.EmailToUser(), context.setEmail('')}}>Lähetä</SubmitButton>
-    
-                    }
-                </Gx>
+	return (
+		<FormContainer>
+			<InputContainer>
+				<InputField value={context.inputValue} onChange={(e) => context.setInput(e.target.value)} type="text" placeholder="Syötä sähköpostiosoite" />
+			</InputContainer>
 
-            </FormContainer>
+			<ButtonContainer>
+				{
+					context.inputValue === "" ?
+						null
+						:
+						<SubmitButton onClick={() => { context.setEmail(context.inputValue), context.EmailToUser(), context.setEmail('') }}>Lähetä</SubmitButton>
+				}
 
-        </Wrapper>
-           
+			</ButtonContainer>
 
-    );
+
+		</FormContainer>
+
+
+
+	);
 };
 
 

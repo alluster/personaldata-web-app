@@ -8,130 +8,89 @@ const handle = routes.getRequestHandler(app);
 const PORT = process.env.PORT || 3000;
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser')
-sgTransport = require('nodemailer-sendgrid-transport');
+const sgTransport = require('nodemailer-sendgrid-transport');
 const companiesEmailList = require('./companies.json')
 
 
 app.prepare().then(() => {
-    const server = express();
-    server.use(bodyParser.json())
+	const server = express();
+	server.use(bodyParser.json())
 
-    server.use(bodyParser.urlencoded({
-      extended: true
-    }));
-   
-    server.post('/sendEmail', (req, res) => {
-        var transporter = nodemailer.createTransport(sgTransport({
+	server.use(bodyParser.urlencoded({
+		extended: true
+	}));
+
+	server.post('/sendEmail', (req, res) => {
+		var transporter = nodemailer.createTransport(sgTransport({
 			auth: {
-				api_key: process.env.ADMIN_EMAIL_API_KEY 
+				api_key: process.env.ADMIN_EMAIL_API_KEY
 			}
 		}));
 		const userEmailOptions = {
-			title: "Kiitos kun käytit palveluamme!",
-			ingress: "Olemme lähettäneet tietosi yritysrekisteriimme. Tarkkaile sähköpostiasi mahdollisten yhteydenottojen varalta.",
-			body: "Oletamme yritysten lähettävän sinulle sähköpostiosoitteeseesi liittyvät datat. Emme kuitenkaan voi taata että näin käy joten olethan kärsivällinen. Mikäli yrityksistä ei kuulu, olethan kiltti ja annat meille palautetta niin tarkistamme yrityksen tilanteen.",
+			title: `Thank you for using our service ${process.env.SERVICE_DOMAIN}`,
+			body: "We have sent GDPR personal data request associated with {email} to organisations listed bellow.  We hope that all listed organisations would send all your personal data to {email} however we cannot guarantee this. The organizations state that collecting and sending all GDPR data associated with your email might take a while so we ask for your patience. In case you won’t receive data from some of the listed organisations we kindly ask you to report this to us so we can make sure data will be received in the future.",
 		}
-  
-        const companyEmailOptions = {
-			title: "Henkilökohtaiseen dataan liittyvä tietopyyntö",
-			ingress: "Olkaa hyvä ja lähettäkää kaikki email osoitteeseen \u00A0"+ `${req.body.email}` + "\u00A0 liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen \u00A0" + `${req.body.email}`,
-			body: "Olette vastaanottaneet tämän viestin koska käyttäjämme on tehnyt tietopyynnön liittyen dataan joka liittyy sähköpostiosoitteeseen \u00A0" + `${req.body.email}` + "\u00A0 liittyvä data vastauksena tähän sähköpostiin tai uutena viestinä suoraan email osoitteeseen \u00A0" + `${req.body.email}`,
-		  }
+		
+		const companyEmailOptions = {
+			title: "GDPR personal data request for data associated with email: \u00A0" + `${req.body.email}` + "\u00A0",
+			body: "\u00A0" + `${req.body.email}` + "\u00A0  has made an GDPR personal data request to your organisation using our service {process.env.SERVICE_DOMAIN}."
+		}
+		
 		const emailToCompanies =
 			`${companyEmailOptions.title}
-			${companyEmailOptions.ingress}
 			${companyEmailOptions.body}
 			`
 		const emailToUser = `
-			<html>
-			<head>
-			<style>
-			background {
-			width: 100%;
-			height: 100%;
-			padding: 30px;
-			}
-			h1 {
-				font-family: Montserrat;
-			font-size: 300%;
-			}
-			h3 {
-				font-size: 220%;
-
-			}
-			p  {
-			font-family: Montserrat;
-			font-size: 160%;
-			margin-bottom: 20px;
-			}
-
-			</style>
-			</head>
-				<body>
-				<div style="padding: 30px;width: 100%;height:100%">
-				<div>
-				<img style="max-width: 200px" src="https://personaldata.herokuapp.com/logo-dark.png"  alt="Personaldata.fi"/>
-				</div>
-				<div style="max-width: 80%;">
-					<h1>${userEmailOptions.title}</h1>
-					<h3>${userEmailOptions.ingress}</h3>
-					<p>${userEmailOptions.body}</p>
-				</div>
-
-				<div>
-					<a  href="http://personaldata.fi">www.personaldata.fi</></a>
-				</div>
-				<div>
-					<a href="https://shop.spreadshirt.fi/personaldatafi/">Tue projektia hankkimalla huppari verkkokaupastamme</a>
-				</div>
-				<p>
-				data@personaldata.fi
-				</p>
-				</div>
-				</body>
-			</html>`
+			${userEmailOptions.title}
+			${userEmailOptions.body}
+				`
 
 
-        var mailToUser = {
-			from: `data@personaldata.fi`,
+		var mailToUser = {
 			to: `${req.body.email}`,
+			from: process.env.SENDER_EMAIL,
+			bcc: `${req.body.email}`,
 			subject: `${userEmailOptions.title}`,
 			text: `${userEmailOptions.ingress}`,
-			replyTo: 'data@personaldata.fi',
+			replyTo: process.env.SENDER_EMAIL,
 			html: `${emailToUser}`
 		};
-		var mailToCompanies = {
-			from: `${req.body.email}`,
-			to: `${companiesEmailList}`,
-			subject: `${companyEmailOptions.title}`,
-			text: `${companyEmailOptions.ingress}`,
-			replyTo: `${req.body.email}`,
-			html: `${emailToCompanies}`
-        };
-        
-        transporter.sendMail(mailToUser, function(error, info){
-          if (error) {
-            console.log(error);
-          } else {
-          	}
-		});
-		transporter.sendMail(mailToCompanies, function(error, info){
+	
+
+		transporter.sendMail(mailToUser, function (error, info) {
 			if (error) {
-			  console.log(error);
+				console.log(error);
 			} else {
+			}
+		});
+		companiesEmailList.forEach(function (address) {
+			transporter.sendMail({
+				to: address.email,
+				from: process.env.SENDER_EMAIL,
+				bcc: `${companiesEmailList}`,
+				subject: `${companyEmailOptions.title}`,
+				text: `${companyEmailOptions.ingress}`,
+				replyTo: process.env.SENDER_EMAIL,
+				html: `${emailToCompanies}`
+			}, function (error, info) {
+				if (error) {
+					console.log(error);
+				} else {
+					console.log(info)
 				}
-		  });
+			});
+		});
 	});
-		
-   
-    server.get('*', (req, res) => {
-        return handle(req, res);
-    });
+
+
+	server.get('*', (req, res) => {
+		return handle(req, res);
+	});
 	server.get("/user/:slug", (req, res) => {
 		return app.render(req, res, "/", { slug: req.params.slug })
-	  })
-    server.listen(PORT, err => {
-        if (err) throw err;
-        console.log('> Ready on http://localhost:' + PORT);
-    });
+	})
+	server.listen(PORT, err => {
+		if (err) throw err;
+		console.log('> Ready on http://localhost:' + PORT);
+	});
 });
